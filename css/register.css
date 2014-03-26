@@ -1,0 +1,63 @@
+.title{
+  font-family: 'Quando', serif;
+  font-size: 40px;
+}
+
+.titletext{
+  text-align: center;
+}
+
+.logintitle{
+  font-size: 30px;
+  text-align: center;
+}
+
+.container {
+  width: 400px;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 2px;
+  margin: 0 auto;
+}
+.form-control { margin-bottom:10px; }
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  font-size: 14px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-bottom:10px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.strokeme
+{
+  color: black;
+  text-shadow:
+  -1px -1px 0 #FFFFFF,
+  1px -1px 0 #FFFFFF,
+  -1px 1px 0 #FFFFFF,
+  1px 1px 0 #FFFFFF;
+}

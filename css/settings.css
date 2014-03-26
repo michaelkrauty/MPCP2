@@ -1,0 +1,17 @@
+.header{
+	margin-left: 38%;
+	margin-right: 38%;
+}
+.content{
+	margin-left: 40%;
+	margin-right: 40%;
+}
+.emailcontainer{
+	margin-top: 50px;
+}
+.passwordcontainer{
+	margin-top: 10px;
+}
+.submit{
+	margin-top: 15px;
+}

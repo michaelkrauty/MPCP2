@@ -1,0 +1,21 @@
+.serverlist{
+	align: center;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+.center{
+	text-align: center;
+}
+th{
+	word-wrap: break-word;
+	text-align: center;
+	vertical-align: middle;
+	max-width: 200px;
+}
+td{
+	word-wrap: break-word;
+	text-align: center;
+	vertical-align: middle;
+	max-width: 200px;
+}
