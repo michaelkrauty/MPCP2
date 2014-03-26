@@ -61,44 +61,72 @@
 	<?php include_once "inc/header.php";?>
 		<div class="body">
 			<div class="main">
-			<?php if($auth){
-				if(isset($_GET["page"]) && $_GET["page"] == "jar"){?>
-				
-				*jar*
-				
-				
-			<?php }else{?>
+			<?php if($auth){?>
 				<div class="container-fluid">
 					<div class="row">
 						<?php include_once "inc/managesidebar.php"; ?>
 						<div class="col-sm-9 col-sm-offset-4 col-md-8 col-md-offset-0 main">
 							<div class="bar1">
+								<?php if(isset($_GET["page"])){?>
+									
+									<?php if($_GET["page"] == "jar"){?>
+									<?php
+									$filename = "/var/mpcp2/servers/".$_SESSION["server"]["id"]."/server.properties";
+									$lines = file($filename);
+									foreach($lines as &$line){
+										$obj = unserialize($line);
+										if(substr($line, 0, 16) = "default-gamemode"){
+											$line = "default-gamemode: 1";
+											break;
+										}
+									}
+									file_put_contents($filename, implode("\n", $lines));
+									?>
+									
+									
+									<?php }?>
+									<?php if($_GET["page"] == "config"){?>
+									
+									config
+									
+									
+									<?php }?>
+									<?php if($_GET["page"] == "files"){?>
+									
+									files
+									
+									
+									<?php }?>
+									<?php if($_GET["page"] == "tasks"){?>
+									
+									tasks
+									
+									
+									<?php }?>
+									<?php if($_GET["page"] == "backup"){?>
+									
+									backup
+									
+									
+									<?php }?>
+									<?php if($_GET["page"] == "plugins"){?>
+									
+									plugins
+									
+									
+									<?php }?>
+									<?php if($_GET["page"] == "support"){?>
+									
+									support
+									
+									
+									<?php }?>
+								<?php }else{?>
 								<div class="well">
 								<?php echo $_SESSION["server"]["id"]["name"];?>
-									<div class="status">
-										<?php
-											$temp["screen"] = false;
-											$temp["server"] = false;
-											if(screenStat($_SESSION["server"]["id"])){
-												$temp["screen"] = true;
-											}
-											if(serverOnline($_SESSION["server"]["id"])){
-												$temp["server"] = true;
-											}
-											if(!$temp["screen"] && !$temp["server"]){
-												echo "<div class=\"alert alert-danger\">Server is Offline!</div>";
-											}
-											if($temp["screen"] && !$temp["server"]){
-												echo "<div class=\"alert alert-warning\">Server is Restarting!</div>";
-											}
-											if($temp["screen"] && $temp["server"]){
-												echo "<div class=\"alert alert-success\">Server is Online!</div>";
-											}
-											
-											
-											
-										?>
-									</div>
+								<div class="statusbar">
+									<div id="status"><?php include_once "inc/minecraftserverstatus.php";?></div>
+								</div>
 									<h2>Server Address: <strong><?php echo $_SESSION["server"]["host"];if($_SESSION["server"]["port"] != "25565"){echo ":".$_SESSION["server"]["port"];}?></strong></h2>
 										<div id="buttons">
 											
