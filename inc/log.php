@@ -1,4 +1,6 @@
-<?php session_start();?>
+<?php if(session_id() == ""){
+	session_start();
+}?>
 <style type="text/css">
 div.terms
 {
