@@ -24,6 +24,7 @@
 					$_SESSION["server"]["suspended"] = $temp["suspended"];
 					$getJar = getJar( (int) $_SESSION["server"]["jarid"]);
 					$_SESSION["server"]["jarlocation"] = $getJar["location"];
+					$_SESSION["server"]["path"] = "/var/mpcp2/servers/".$_SESSION["server"]["id"]."/";
 					
 					
 					
@@ -68,60 +69,93 @@
 						<div class="col-sm-9 col-sm-offset-4 col-md-8 col-md-offset-0 main">
 							<div class="bar1">
 								<?php if(isset($_GET["page"])){?>
-									
-									<?php if($_GET["page"] == "jar"){?>
-									<?php
-									$filename = "/var/mpcp2/servers/".$_SESSION["server"]["id"]."/server.properties";
-									$lines = file($filename);
-									foreach($lines as &$line){
-										$obj = unserialize($line);
-										if(substr($line, 0, 16) = "default-gamemode"){
-											$line = "default-gamemode: 1";
-											break;
-										}
+									<?php if($_GET["page"] == "jar"){
+										
 									}
-									file_put_contents($filename, implode("\n", $lines));
-									?>
+									
+									if($_GET["page"] == "config"){
+										echo "<div class=\"well\">";
+										if(file_exists("/var/mpcp2/servers/".$_SESSION["server"]["id"]."/server.properties")){
+											$file = "/var/mpcp2/servers/".$_SESSION["server"]["id"]."/server.properties";?>
+											
+											
+											
+											
+											<select>
+												<option value=0>Survival</option>
+												<option value=1>Creative</option>
+												<option value=2>Adventure</option>
+											</select>
+											<br>
+											
+											
+											
+											
+											
+											<?php
+											if(false){
+												$lines = file($file);
+												foreach($lines as &$line){
+													if(substr($line, 0, 9) == "gamemode="){
+														$line = "gamemode=0\n";
+														break;
+													}
+												}
+												file_put_contents($file, $lines);
+											}
+											
+											
+											
+											
+											
+											
+											echo str_replace("\n", "<br>", file_get_contents($file));
+										}
+										
+										echo "</div>";
 									
 									
-									<?php }?>
-									<?php if($_GET["page"] == "config"){?>
 									
-									config
+									}
+									if($_GET["page"] == "files"){?>
+									
+									<div class="well">
+									<?php
+									$scandir = scandir($_SESSION["server"]["path"]);
+									$arr = array_splice($scandir, 2, count($scandir) - 2);
+										var_dump($arr);
+										?>
+									</div>
 									
 									
-									<?php }?>
-									<?php if($_GET["page"] == "files"){?>
-									
-									files
-									
-									
-									<?php }?>
-									<?php if($_GET["page"] == "tasks"){?>
+									<?php }
+									if($_GET["page"] == "tasks"){?>
 									
 									tasks
 									
 									
-									<?php }?>
-									<?php if($_GET["page"] == "backup"){?>
+									<?php }
+									if($_GET["page"] == "backup"){?>
 									
 									backup
 									
 									
-									<?php }?>
-									<?php if($_GET["page"] == "plugins"){?>
+									<?php }
+									if($_GET["page"] == "plugins"){?>
 									
-									plugins
+									<div class="well">
+										<?php var_dump(array_splice(scandir($_SESSION["server"]["path"]), 2, count(scandir($_SESSION["server"]["path"])) - 2));?>
+									</div>
 									
 									
-									<?php }?>
-									<?php if($_GET["page"] == "support"){?>
+									<?php }
+									if($_GET["page"] == "support"){?>
 									
 									support
 									
 									
-									<?php }?>
-								<?php }else{?>
+									<?php }
+								}else{?>
 								<div class="well">
 								<?php echo $_SESSION["server"]["id"]["name"];?>
 								<div class="statusbar">
@@ -137,6 +171,20 @@
 												<button name="reload" type="submit" class='btn btn-lg btn-info' >Reload</button>
 											</form>
 										</div>
+									</div>
+									<div class="well">
+										<h2>Console</h2>
+										<div class="well" style="text-align:left;">
+											<script type="text/javascript">
+												var auto_refresh = setInterval(
+												function (){
+													$('#load').load('log.php');
+												}, 2000);
+											</script>
+											<div id="load" style="min-width:100%;min-height:500px;"><?php include_once "log.php";?></div>
+											
+										</div>
+										<input type="text" style="float:left;" class="form-control" placeholder="Enter a command here..." /><input value="Send Command" style="max-width:120px;" class="btn btn btn-primary btn-block" type="submit" />
 									</div>
 								</div>
 								<div class="bar2">
