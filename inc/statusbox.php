@@ -1,4 +1,6 @@
-<?php session_start();?>
+<?php if(session_id() == ""){
+	session_start();
+}?>
 <?php include_once "mc_connect.php";
 	$temp["screen"] = false;
 	$temp["server"] = false;
