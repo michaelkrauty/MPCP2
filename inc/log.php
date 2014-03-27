@@ -1,3 +1,4 @@
+<?php session_start();?>
 <style type="text/css">
 div.terms
 {
@@ -37,7 +38,7 @@ div.terms
 		$str = MineToWeb($str);
 		return $str;
 	}
-	echo parseColor(str_replace("\n", "<br>", (rtrim(shell_exec("tail -n 25 /var/mpcp2/servers/1/logs/latest.log"), "\n"))));
+	echo parseColor(str_replace("\n", "<br>", (rtrim(shell_exec("tail -n 25 /var/mpcp2/servers/".$_SESSION["server"]["id"]."/logs/latest.log"), "\n"))));
 	
 	
 	function MineToWeb($minetext){

@@ -159,7 +159,7 @@
 								<div class="well">
 								<?php echo $_SESSION["server"]["id"]["name"];?>
 								<div class="statusbar">
-									<div id="status"><?php include_once "inc/minecraftserverstatus.php";?></div>
+									<div id="statusbox"><?php include_once "inc/statusbox.php";?></div>
 								</div>
 									<h2>Server Address: <strong><?php echo $_SESSION["server"]["host"];if($_SESSION["server"]["port"] != "25565"){echo ":".$_SESSION["server"]["port"];}?></strong></h2>
 										<div id="buttons">
@@ -178,10 +178,11 @@
 											<script type="text/javascript">
 												var auto_refresh = setInterval(
 												function (){
-													$('#load').load('log.php');
+													$('#load').load('inc/log.php');
+													$('#statusbox').load('inc/statusbox.php');
 												}, 2000);
 											</script>
-											<div id="load" style="min-width:100%;min-height:500px;"><?php include_once "log.php";?></div>
+											<div id="load" style="min-width:100%;min-height:500px;"><?php include_once "inc/log.php";?></div>
 											
 										</div>
 										<input type="text" style="float:left;" class="form-control" placeholder="Enter a command here..." /><input value="Send Command" style="max-width:120px;" class="btn btn btn-primary btn-block" type="submit" />
