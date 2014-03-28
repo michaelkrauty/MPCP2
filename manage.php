@@ -144,7 +144,14 @@
 									if($_GET["page"] == "plugins"){?>
 									
 									<div class="well">
-										<?php var_dump(array_splice(scandir($_SESSION["server"]["path"]), 2, count(scandir($_SESSION["server"]["path"])) - 2));?>
+									<?php $scandir = scandir($_SESSION["server"]["path"]."/plugins");
+										var_dump(array_splice($scandir, 2));
+										var_dump($_SESSION["server"]);
+										
+										var_dump(md5_file($_SESSION["server"]["path"]));
+										var_dump(md5_file($_SESSION["server"]["path"]."/logs/latest.log"))
+										
+									?>
 									</div>
 									
 									
@@ -155,6 +162,51 @@
 									
 									
 									<?php }
+									if($_GET["page"] == "logs"){?>
+										<div class="well">
+											<table class="table table-hover table-bordered">
+												<tr>
+													<th style="max-width:100px;">Name</th>
+													<th style="max-width:100px;">Date</th>
+													<th style="max-width:100px;">Format</th>
+													<th style="max-width:100px;">Actions</th>
+												</tr>
+										
+										<?php
+										$scandir = scandir($_SESSION["server"]["path"]."/logs", SCANDIR_SORT_DESCENDING)[$i];
+										for($i = 0; $i < count(scandir($_SESSION["server"]["path"]."/logs", SCANDIR_SORT_DESCENDING)); $i++){
+											if(scandir($_SESSION["server"]["path"]."/logs", SCANDIR_SORT_DESCENDING)[$i] != "." &&
+											scandir($_SESSION["server"]["path"]."/logs", SCANDIR_SORT_DESCENDING)[$i] != ".."){
+												
+												$temp["test"] = null;
+												
+												
+												$name = null;
+												$date = null;
+												$format = null;
+												$actions = null;
+												
+												
+												
+												echo "<tr>";
+												echo "<td stuff>";
+												echo "<td stuff>";
+												echo "<td stuff>";
+												echo "<td stuff>";
+												echo "</tr>";
+												
+												echo $scandir."<br>";
+												
+												
+												
+											}
+										}									
+										?>
+										
+										</table>
+										</div>
+										<?php
+									}
 								}else{?>
 								<div class="well">
 								<?php echo $_SESSION["server"]["id"]["name"];?>
@@ -225,7 +277,7 @@
 									$temp["host"] = $userServers[$i]["host"];
 									$temp["port"] = $userServers[$i]["port"];
 									$temp["jar"] = $userServers[$i]["jar"];
-									$temp1["jarname"] = getJar( (int) $temp["jar"])["name"];
+									$temp["jarname"] = getJar( (int) $temp["jar"])["name"];
 									$temp["id"] = $userServers[$i]["id"];
 									$temp["memory"] = $userServers[$i]["memory"];
 									$temp["suspended"] = $userServers[$i]["suspended"];
@@ -240,7 +292,7 @@
 									echo "<td style=\"max-width:100px;\">".$temp["name"]."</td>";
 									echo "<td style=\"max-width:100px;\">".$temp["host"].":".$temp["port"]."</td>";
 									echo "<td style=\"max-width:50px;\">".round(($temp["memory"] / 1024), 2)."GB</td>";
-									echo "<td style=\"max-width:100px;\">".$temp1["jarname"]."</td>";
+									echo "<td style=\"max-width:100px;\">".$temp["jarname"]."</td>";
 									echo "<td style=\"max-width:50px;\"><button onClick=\"parent.location='manage.php?server=".$temp["id"]."'\" class='btn btn-info'>Manage</button></td>";
 									echo "<td style=\"max-width:50px;\">".$temp["online"]."</td>";
 									echo "</tr>";
@@ -251,7 +303,7 @@
 								<td style="max-width:100px;">Demo Server</td>
 									<td style="max-width:100px;">dominationvps.com:PORTHERE</td>
 									<td style="max-width:50px;">0.5GB</td>
-									<td style="max-width:100px;">Bukkit.1.7.5-latest-dev.jar</td>
+									<td style="max-width:100px;"><?php echo getJar(1)["name"];?></td>
 									<td><button name="start" class='btn btn-small btn-success'>Start</button> <button name="stop" class='btn btn-small btn-danger'>Stop</button>
                 					<button name="restart" class='btn btn-small btn-warning'>Restart</button> <button name="reload" class='btn btn-small btn-info'>Reload</button></td>
 									</tr>

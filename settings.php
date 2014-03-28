@@ -17,17 +17,16 @@
 	<?php include_once "inc/header.php";?>
 		<?php
 			if(isset($_POST["email"]) || isset($_POST["password"])){
-				$updateEmail = $_SESSION["email"];
+				$updateEmail = $_SESSION["user"]["email"];
 				$updatePassword = $_SESSION["password"];
-				if(isset($_POST["email"]) && $_POST["email"] != "" && $_POST["email"] != $_SESSION["email"]){
+				if(isset($_POST["email"]) && $_POST["email"] != "" && $_POST["email"] != $_SESSION["user"]["email"]){
 					$updateEmail = $_POST["email"];
 					$_SESSION["email"] = $updateEmail;
 				}
-				if(isset($_POST["password"]) && $_POST["password"] != "" && $_POST["password"] != $_SESSION["password"]){
+				if(isset($_POST["password"]) && $_POST["password"] != "" && $_POST["password"] != $_SESSION["user"]["password"]){
 					$updatePassword = $_POST["password"];
-					$_SESSION["password"] = $updatePassword;
+					$_SESSION["user"]["password"] = $updatePassword;
 				}
-				editUser($_SESSION["username"], $updateEmail, $_SESSION["key"], $updatePassword);
 			}
 		?>
 		<div class="body">
@@ -42,13 +41,13 @@
 						<div class="emailcontainer">
 							<div class="input-group">
 								<span class="input-group-addon">Email:</span>
-								<input name="email" type="text" class="form-control" placeholder="<?php echo $_SESSION['email'];?>" autofocus />
+								<input name="email" type="text" class="form-control" placeholder="<?php echo $_SESSION["user"]['email'];?>" autofocus />
 							</div>
 						</div>
 						<div class="passwordcontainer">
 							<div class="input-group">
 								<span class="input-group-addon">Password:</span>
-								<input name="password" type="password" class="form-control" placeholder="<?php for($i = 0; $i < strlen($_SESSION['password']); $i++){echo "*";} ?>" />
+								<input name="password" type="password" class="form-control" placeholder="<?php for($i = 0; $i < strlen($_SESSION["user"]['password']); $i++){echo "*";} ?>" />
 							</div>
 						</div>
 						<div class="submit">

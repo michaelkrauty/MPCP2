@@ -10,6 +10,7 @@
         <li style="margin-top:5px;"><input class="btn btn-lg btn-info btn-block" type="button" value="Backup" onClick="parent.location='manage.php?server=<?php echo $_SESSION["server"]["id"];?>&page=backup'" /></li>
         <li style="margin-top:5px;"><input class="btn btn-lg btn-info btn-block" type="button" value="Plugins" onClick="parent.location='manage.php?server=<?php echo $_SESSION["server"]["id"];?>&page=plugins'" /></li>
         <li style="margin-top:5px;"><input class="btn btn-lg btn-info btn-block" type="button" value="Support" onClick="parent.location='support.php'" /></li>
+        <li style="margin-top:5px;"><input class="btn btn-lg btn-info btn-block" type="button" value="Log Viewer" onClick="parent.location='manage.php?server=<?php echo $_SESSION["server"]["id"];?>&page=logs'" /></li>
       </ul>
     </div>
   </div>
