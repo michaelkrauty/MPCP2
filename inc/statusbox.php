@@ -1,6 +1,6 @@
-<?php if(session_id() == null){
-	session_start();
-}?>
+<?php // if(session_id() == null){
+//	session_start();
+//}?>
 <?php if(isset($_SESSION["server"]["id"])){?>
 <?php include_once "mc_connect.php";
 	$temp["screen"] = false;
