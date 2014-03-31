@@ -164,38 +164,29 @@
 									<?php }
 									if($_GET["page"] == "logs"){?>
 										<div class="well">
+											<h2>Logs</h2>
 											<table class="table table-hover table-bordered">
 												<tr>
 													<th style="max-width:100px;">Name</th>
-													<th style="max-width:100px;">Date</th>
-													<th style="max-width:100px;">Format</th>
 													<th style="max-width:100px;">Actions</th>
 												</tr>
 										
 										<?php
-										$scandir = scandir($_SESSION["server"]["path"]."/logs", SCANDIR_SORT_DESCENDING)[$i];
 										for($i = 0; $i < count(scandir($_SESSION["server"]["path"]."/logs", SCANDIR_SORT_DESCENDING)); $i++){
+											$scandir = scandir($_SESSION["server"]["path"]."/logs", SCANDIR_SORT_DESCENDING)[$i];
 											if(scandir($_SESSION["server"]["path"]."/logs", SCANDIR_SORT_DESCENDING)[$i] != "." &&
 											scandir($_SESSION["server"]["path"]."/logs", SCANDIR_SORT_DESCENDING)[$i] != ".."){
+												$path = $_SESSION["server"]["path"]."/logs/";
 												
-												$temp["test"] = null;
-												
-												
-												$name = null;
-												$date = null;
-												$format = null;
-												$actions = null;
+												$name = $scandir;
+												$actions = "view | delete | download | share";
 												
 												
 												
 												echo "<tr>";
-												echo "<td stuff>";
-												echo "<td stuff>";
-												echo "<td stuff>";
-												echo "<td stuff>";
+												echo "<td>".$name."</td>";
+												echo "<td>".$actions."</td>";
 												echo "</tr>";
-												
-												echo $scandir."<br>";
 												
 												
 												
