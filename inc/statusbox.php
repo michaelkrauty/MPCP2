@@ -1,6 +1,7 @@
-<?php if(session_id() == ""){
+<?php if(session_id() == null){
 	session_start();
 }?>
+<?php if(isset($_SESSION["server"]["id"])){?>
 <?php include_once "mc_connect.php";
 	$temp["screen"] = false;
 	$temp["server"] = false;
@@ -20,3 +21,4 @@
 		echo "<div class=\"alert alert-success\">Server is Online!</div>";
 	}
 ?>
+<?php }?>
