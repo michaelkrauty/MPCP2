@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <div class="col-sm-3 col-md-2 sidebar">
+  <div class="col-sm-3 col-md-2 sidebar" style="padding-right:0px;padding-left:0px;min-width:230px;">
     <div class='well'>
       <ul class="nav nav-sidebar">
         <li><input class="btn btn-lg btn-info btn-block" type="button" value="Dashboard" onClick="parent.location='manage.php?server=<?php echo $_SESSION["server"]["id"];?>'" /></li>

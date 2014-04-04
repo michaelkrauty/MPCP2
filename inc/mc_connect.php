@@ -29,7 +29,7 @@
 		exec("screen -p 0 -S mpcp2_$serverId -X eval \"stuff 'stop'\015\"");
 	}
 	
-	function restartServer($serverId/*, $memory, $jar, $host, $port*/){
+	function restartServer($serverId){
 		$getServer = getServer($serverId);
 		$temp["memory"] = $getServer["memory"];
 		$temp["jarid"] = $getServer["jarid"];
@@ -63,22 +63,22 @@
 
 	function createBackup($serverId){
 		$date = date("j-n-Y_G:i");
-		if(!file_exists("/var/mpcp/backups/$serverId")){
-			exec("mkdir /var/mpcp/backups/$serverId");
+		if(!file_exists("/var/mpcp2/backups/$serverId")){
+			exec("mkdir /var/mpcp2/backups/$serverId");
 		}
-		exec("cd /var/mpcp/servers/$serverId && zip $date * && mv $date.zip /var/mpcp/backups/$serverId/");
+		exec("cd /var/mpcp2/servers/$serverId && zip $date * && mv $date.zip /var/mpcp2/backups/$serverId/");
 	}
 
 	function restoreBackup($serverId, $backupName){
-		if(file_exists("/var/mpcp/backups/$serverId/$backupName")){
+		if(file_exists("/var/mpcp2/backups/$serverId/$backupName")){
 			createBackup($serverId);
-			exec("rm -rf /var/mpcp/servers/$serverId/* && mv /var/mpcp/backups/$serverId/$backupName /var/mpcp/servers/$serverId/ && cd /var/mpcp/servers/$serverId && unzip $backupName && rm -f $backupName");
+			exec("rm -rf /var/mpcp2/servers/$serverId/* && mv /var/mpcp2/backups/$serverId/$backupName /var/mpcp2/servers/$serverId/ && cd /var/mpcp2/servers/$serverId && unzip $backupName && rm -f $backupName");
 		}
 	}
 	
 	function deleteBackup($serverId, $backupName){
-		if(file_exists("/var/mpcp/backups/$serverId/$backupName")){
-			exec("rm -f /var/mpcp/servers/$serverId/$backupName");
+		if(file_exists("/var/mpcp2/backups/$serverId/$backupName")){
+			exec("rm -f /var/mpcp2/servers/$serverId/$backupName");
 		}
 	}
 	

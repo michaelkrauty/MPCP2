@@ -66,7 +66,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<?php include_once "inc/managesidebar.php"; ?>
-						<div class="col-sm-9 col-sm-offset-4 col-md-8 col-md-offset-0 main">
+						<div class="col-sm-9 col-sm-offset-4 col-md-8 col-md-offset-0 main" style="margin-right:0px;padding-right:0px;">
 							<div class="bar1">
 								<?php if(isset($_GET["page"])){?>
 									<?php if($_GET["page"] == "jar"){
@@ -191,7 +191,7 @@
 												
 												
 											}
-										}									
+										}
 										?>
 										
 										</table>
