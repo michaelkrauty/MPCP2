@@ -33,7 +33,7 @@
 						){
 							echo "<button name='editfile'>Edit</button> ";
 						}echo "
-							<button name='renamefile' onclick='renamefile(".$filename.")'>Rename</button>
+							<button name='renamefile'>Rename</button>
 							<button name='movefile'>Move</button>
 							<button name='copyfile'>Copy</button>
 							<button name='deletefile'>Delete</button>
