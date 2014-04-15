@@ -14,43 +14,43 @@ div.terms
 
 <?php
 	function parseColor($str){
-		$str = str_replace("[0;30;22m", "§0", $str);
-		$str = str_replace("[0;34;22m", "§1", $str);
-		$str = str_replace("[0;32;22m", "§2", $str);
-		$str = str_replace("[0;36;22m", "§3", $str);
-		$str = str_replace("[0;31;22m", "§4", $str);
-		$str = str_replace("[0;35;22m", "§5", $str);
-		$str = str_replace("[0;33;22m", "§6", $str);
-		$str = str_replace("[0;37;22m", "§7", $str);
-		$str = str_replace("[0;30;1m", "§8", $str);
-		$str = str_replace("[0;34;1m", "§9", $str);
-		$str = str_replace("[0;32;1m", "§a", $str);
-		$str = str_replace("[0;36;1m", "§b", $str);
-		$str = str_replace("[0;31;1m", "§c", $str);
-		$str = str_replace("[0;35;1m", "§d", $str);
-		$str = str_replace("[0;33;1m", "§e", $str);
-		$str = str_replace("[0;37;1m", "§f", $str);
-		$str = str_replace("[m", "§r", $str);
-		$str = str_replace("[21m", "§l", $str);
-		$str = str_replace("[9m", "§m", $str);
-		$str = str_replace("[4m", "§n", $str);
-		$str = str_replace("[3m", "§o", $str);
-		$str = str_replace("[5m", "§k", $str);
+		$str = str_replace("[0;30;22m", "ï¿½0", $str);
+		$str = str_replace("[0;34;22m", "ï¿½1", $str);
+		$str = str_replace("[0;32;22m", "ï¿½2", $str);
+		$str = str_replace("[0;36;22m", "ï¿½3", $str);
+		$str = str_replace("[0;31;22m", "ï¿½4", $str);
+		$str = str_replace("[0;35;22m", "ï¿½5", $str);
+		$str = str_replace("[0;33;22m", "ï¿½6", $str);
+		$str = str_replace("[0;37;22m", "ï¿½7", $str);
+		$str = str_replace("[0;30;1m", "ï¿½8", $str);
+		$str = str_replace("[0;34;1m", "ï¿½9", $str);
+		$str = str_replace("[0;32;1m", "ï¿½a", $str);
+		$str = str_replace("[0;36;1m", "ï¿½b", $str);
+		$str = str_replace("[0;31;1m", "ï¿½c", $str);
+		$str = str_replace("[0;35;1m", "ï¿½d", $str);
+		$str = str_replace("[0;33;1m", "ï¿½e", $str);
+		$str = str_replace("[0;37;1m", "ï¿½f", $str);
+		$str = str_replace("[m", "ï¿½r", $str);
+		$str = str_replace("[21m", "ï¿½l", $str);
+		$str = str_replace("[9m", "ï¿½m", $str);
+		$str = str_replace("[4m", "ï¿½n", $str);
+		$str = str_replace("[3m", "ï¿½o", $str);
+		$str = str_replace("[5m", "ï¿½k", $str);
 		
 		$str = MineToWeb($str);
 		return $str;
 	}
-	echo parseColor(str_replace("\n", "<br>", (rtrim(shell_exec("tail -n 25 /var/mpcp2/servers/".$_SESSION["server"]["id"]."/logs/latest.log"), "\n"))));
+	echo parseColor(str_replace("\n", "<br>", (rtrim(shell_exec("tail -n 20 /var/mpcp2/servers/".$_SESSION["server"]["id"]."/logs/latest.log"), "\n"))));
 	
 	
 	function MineToWeb($minetext){
-		preg_match_all("/[^§&]*[^§&]|[§&][0-9a-z][^§&]*/", $minetext, $brokenupstrings);
+		preg_match_all("/[^ï¿½&]*[^ï¿½&]|[ï¿½&][0-9a-z][^ï¿½&]*/", $minetext, $brokenupstrings);
 		$returnstring = "";
 		foreach ($brokenupstrings as $results){
 			$ending = '';
 			foreach ($results as $individual){
-				$code = preg_split("/[&§][0-9a-z]/", $individual);
-				preg_match("/[&§][0-9a-z]/", $individual, $prefix);
+				$code = preg_split("/[&ï¿½][0-9a-z]/", $individual);
+				preg_match("/[&ï¿½][0-9a-z]/", $individual, $prefix);
 				if (isset($prefix[0])){
 					$actualcode = substr($prefix[0], 1);
 					switch ($actualcode){
