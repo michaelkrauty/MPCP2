@@ -1,7 +1,14 @@
 <div class="well">
 	<?php
+	$path = "";
+	if(isset($_GET["path"])){
+		$scandir = scandir($_SESSION["server"]["path"]."/".$_GET["path"]);
+		$path = $_SESSION["server"]["path"]."/".$_GET["path"];
+	}else{
 		$scandir = scandir($_SESSION["server"]["path"]);
-		$arr = array_splice($scandir, 2, count($scandir) - 2);
+		$path = $_SESSION["server"]["path"];
+	}
+	$arr = array_splice($scandir, 2, count($scandir) - 2);
 	?>
 	<form method="post">
 		<table class="table table-hover table-bordered">
@@ -10,29 +17,24 @@
 				<th>Actions</th>
 			</tr>
 			
-			
 			<?php
 			function test($asdf){
 				echo $asdf;
 			}
-			
+			$canEdit = array("txt", "yml", "log", "conf", "html", "json", "properties", "props", "cfg", "lang");
+			date_default_timezone_set("America/Los_Angeles");
 			foreach($arr as $filename){
 				echo "
 					<tr>
 						<td>$filename</td>
 						<td>";
-							if(
-								(substr($filename, strlen($filename) - 4) == ".txt") ||
-								(substr($filename, strlen($filename) - 4) == ".yml") ||
-								(substr($filename, strlen($filename) - 4) == ".cfg") ||
-								(substr($filename, strlen($filename) - 4) == ".xml") ||
-								(substr($filename, strlen($filename) - 4) == ".php") ||
-								(substr($filename, strlen($filename) - 5) == ".conf") ||
-								(substr($filename, strlen($filename) - 5) == ".html") ||
-								(substr($filename, strlen($filename) - 11) == ".properties")
-							){
-								echo "<button name='editfile'>Edit</button> ";
-							}echo "
+					if(in_array(pathinfo($path.$filename, PATHINFO_EXTENSION), $canEdit)){
+						echo "<button name='editfile'>Edit</button> ";
+					}
+					if(is_dir($path.$filename)){
+						echo "<button name='changedir'>Enter Directory</button> ";
+					}
+					echo "
 							<button name='renamefile'>Rename</button>
 							<button name='movefile'>Move</button>
 							<button name='copyfile'>Copy</button>
@@ -40,8 +42,8 @@
 						</td>
 					</tr>
 				";
-				}
+			}
 			?>
 		</table>
 	</form>
-</div>									
+</div>

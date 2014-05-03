@@ -1,4 +1,4 @@
 <?php
-	include_once "inc/mc_connect.php";
-	echo screenStat(1);
+include_once "inc/mc_connect.php";
+echo screenStat(1);
 ?>

@@ -1,13 +1,23 @@
+<?php
+if(isset($_POST['c'])){
+	executeCommand($_SESSION["server"]["id"], $_POST['c']);
+}
+?>
 <div class="well">
-	<h2>Console</h2>
-	<div class="well" style="text-align:left;">
+	<div style="text-align: left;">
 		<script type="text/javascript">
 			var auto_refresh = setInterval(
 			function (){
-				$('#load').load('../inc/log.php');
+				$('#load').load('inc/log.php');
 			}, 2000);
 		</script>
-		<div id="load" style="min-width:100%;min-height:500px;"><?php include_once "inc/log.php";?></div>
+		<div id="load"
+			style="min-width: 100%; min-height: 300px; background-color: black; color: white;"><?php include_once "inc/log.php";?></div>
 	</div>
-	<input type="text" style="float:left;" class="form-control" placeholder="Enter a command here..." /><input value="Send Command" style="max-width:120px;" class="btn btn btn-primary btn-block" type="submit" />
+	<form method='post' style='margin-bottom: 0px;'>
+		<input name='c' type="text" style="float: left; max-width: 80%;"
+			class="form-control" placeholder="Enter a command here..." autofocus /><input
+			value="Send Command" style="min-width: 120px; max-width: 20%"
+			class="btn btn btn-primary btn-block" type="submit" />
+	</form>
 </div>

@@ -53,7 +53,7 @@
  * 
  * getServer($id)
  * String "ERROR:SERVER_DOES_NOT_EXIST
- * Array ("id", "owner", "host", "port", "memory", "jar", "suspended", "name")
+ * Array ("id", "owner", "host", "port", "memory", "jarid", "suspended", "name")
  * 
  * 
  * 9) Edit Server
@@ -98,7 +98,6 @@
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
-
 // 2) Includes
 include_once "config.php";
 
@@ -120,13 +119,13 @@ function createUser($email, $username, $password){
 	$stmt = $mysqli->prepare("INSERT INTO `users`(`ID`, `email`, `username`, `password`, `date_registered`) VALUES (0,?,?,?,?)");
 	$stmt->bind_param("ssss", $email, $username, $password, $date);
 	$stmt->execute();
-	//user created
+	// user created
 	return "SUCCESS";
 }
 
 // 4) Get User
 function getUser($in){
-	if(!is_string($in) && !is_int($in)){
+	if(! is_string($in) && ! is_int($in)){
 		return "ERROR:INCORRECT_INPUT";
 	}
 	$mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
@@ -136,7 +135,7 @@ function getUser($in){
 	}
 	if(is_int($in)){
 		$stmt = $mysqli->prepare("SELECT * FROM `users` WHERE `id`=? LIMIT 1");
-		$stmt->bind_param("i", $in);	
+		$stmt->bind_param("i", $in);
 	}
 	$stmt->execute();
 	$stmt->store_result();
@@ -165,7 +164,7 @@ function getUserServers($id){
 		return "ERROR:USER_HAS_NO_SERVERS";
 	}
 	$stmt->bind_result($db_id, $db_owner, $db_host, $db_port, $db_memory, $db_jar, $db_suspended, $db_name);
-	for($i = 0; $i < $stmt->num_rows; $i++){
+	for($i = 0; $i < $stmt->num_rows; $i ++){
 		$stmt->fetch();
 		$result[$i]["id"] = $db_id;
 		$result[$i]["owner"] = $db_owner;
@@ -177,7 +176,6 @@ function getUserServers($id){
 		$result[$i]["name"] = $db_name;
 	}
 	return $result;
-	
 }
 
 // 6) Edit User
@@ -192,7 +190,7 @@ function editUser($email, $username, $password){
 	if($stmt->num_rows != 1){
 		return "ERROR:USER_DOES_NOT_EXIST";
 	}
-
+	
 	$stmt = $mysqli->prepare("UPDATE `users` SET `email`=?, `username`=?, `password`=? WHERE username=?");
 	$stmt->bind_param("ssss", $email, $username, $password, $username);
 	$stmt->execute();
@@ -223,7 +221,7 @@ function getServer($id){
 	if($stmt->num_rows != 1){
 		return "ERROR:SERVER_DOES_NOT_EXIST";
 	}
-
+	
 	$stmt->bind_result($id, $ownerid, $host, $port, $memory, $jarid, $suspended, $name);
 	$stmt->fetch();
 	$result["id"] = $id;
@@ -267,7 +265,7 @@ function createJar($name, $mod, $version, $build, $location, $startup_args){
 // 11) Get Jar
 function getJar($in){
 	$mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
-	if(!(is_int($in) || is_string($in))){
+	if(! (is_int($in) || is_string($in))){
 		return "ERROR:INCORRECT_INPUT";
 	}
 	if(is_int($in)){
@@ -283,7 +281,7 @@ function getJar($in){
 	if($stmt->num_rows != 1){
 		return "ERROR:JAR_DOES_NOT_EXIST";
 	}
-
+	
 	$stmt->bind_result($db_id, $db_name, $db_mod, $db_version, $db_build, $db_location, $db_startup_args);
 	$stmt->fetch();
 	$result["id"] = $db_id;

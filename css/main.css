@@ -10,6 +10,7 @@ body{
 	background-size: cover;
 }
 .center{
+	align: center;
 	text-align: center;
 }
 .main{
