@@ -23,6 +23,12 @@ include_once "inc/functions.php";
 				have a server & want to manage it, go to the "My Servers" tab.<br>
 				More content will be added in the days to come.
 			</div>
+			<div class="well"
+				style="margin-left: auto; margin-right: auto; max-width: 500px;">
+				<i>
+				<?php echo shell_exec("fortune");?>
+				</i>
+			</div>
 
 		</div>
 	</div>
